@@ -10,10 +10,12 @@ interface GameState {
 }
 
 class Game {
+  private i18n: I18n;
   private story: Story;
   private currentState: GameState;
 
-  constructor(story: Story) {
+  constructor(story: Story, language: string) {
+    this.i18n = new I18n(language);
     this.story = story;
     // Initialisez l'état du jeu avec le nœud de départ de l'histoire
     this.currentState = {
@@ -56,7 +58,25 @@ class Game {
 
   // Méthode pour faire avancer l'histoire
   public choose(optionIndex: number): void {
-    // Logique pour gérer le choix du joueur et avancer l'histoire
+    // Obtenez le nœud actuel de l'histoire
+    const currentNode = this.getCurrentNode();
+
+    // Vérifiez si l'optionIndex est valide
+    if (optionIndex < 0 || optionIndex >= currentNode.options.length) {
+      throw new Error("Invalid option index.");
+    }
+
+    // Obtenez l'option choisie
+    const chosenOption = currentNode.options[optionIndex];
+
+    // Mettez à jour l'état du jeu avec le nouvel ID de nœud
+    this.currentState.currentNodeId = chosenOption.nextNodeId;
+
+    // Vous pouvez ajouter ici une logique supplémentaire, comme vérifier les conditions,
+    // appliquer les conséquences du choix, etc.
+
+    // Appeler la méthode onNodeChange pour gérer le changement de nœud
+    this.onNodeChange(chosenOption.nextNodeId);
   }
 
   // Obtenez le nœud de l'histoire actuel
