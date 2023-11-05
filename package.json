@@ -1,25 +1,19 @@
 {
   "name": "fableflowjs",
-  "version": "1.0.3",
-  "description": "FableFlowJS is a TypeScript library designed to streamline the creation of interactive, narrative-driven games.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "version": "1.0.0",
+  "private": true,
   "scripts": {
-    "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
-  "peerDependencies": {
-    "react": ">=18.2.0",
-    "react-dom": ">=18.2.0"
+    "build": "npm run build:core && npm run build:react",
+    "build:core": "cd packages/core && npm run build",
+    "build:react": "cd packages/react && npm run build",
+    "test": "npm run test:core && npm run test:react",
+    "test:core": "cd packages/core && npm run test",
+    "test:react": "cd packages/react && npm run test",
+    "publish:core": "cd packages/core && npm publish --access public",
+    "publish:react": "cd packages/react && npm publish --access public",
+    "publish:all": "npm run build:core && npm run publish:core && npm run build:react && npm run publish:react"
   },
   "devDependencies": {
-    "@types/node": "^20.8.10",
-    "@types/react": "^18.2.35",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "typescript": "^5.2.2"
   }
 }

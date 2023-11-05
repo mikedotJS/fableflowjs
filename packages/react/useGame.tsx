@@ -1,11 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
-import { Game } from "../core/Game";
-import { Story } from "../core/Story";
+import { Game, Story } from "@fableflowjs/core";
 
 // Ce hook utilise la classe Game pour créer une instance de jeu et gérer son état dans un composant React
-export function useGame(story: Story, language: string) {
+export function useGame(story: Story) {
   // Créez une instance de jeu avec l'histoire fournie
-  const [game] = useState(new Game(story, language));
+  const [game] = useState(new Game(story));
 
   // Utilisez le State de React pour suivre le nœud actuel
   const [currentNode, setCurrentNode] = useState(game.getCurrentNode());
