@@ -1,7 +1,6 @@
 // src/core/Game.ts
 
 // Importez les types et interfaces nécessaires
-import { I18n } from "./I18n";
 import { Story, StoryNode } from "./Story";
 
 // Définition de l'interface pour l'état du jeu, si nécessaire
@@ -11,12 +10,10 @@ interface GameState {
 }
 
 class Game {
-  private i18n: I18n;
   private story: Story;
   private currentState: GameState;
 
-  constructor(story: Story, language: string) {
-    this.i18n = new I18n(language);
+  constructor(story: Story) {
     this.story = story;
     // Initialisez l'état du jeu avec le nœud de départ de l'histoire
     this.currentState = {
@@ -88,19 +85,8 @@ class Game {
       throw new Error("Current node is not defined in the story.");
     }
 
-    // Créez une copie du nœud pour éviter de modifier l'original
-    const translatedNode: StoryNode = {
-      ...currentNode,
-      text: this.i18n.t(currentNode.text), // Traduisez le texte du nœud
-      options: currentNode.options.map((option) => ({
-        // Traduisez les options
-        ...option,
-        text: this.i18n.t(option.text),
-      })),
-    };
-
-    // Retournez le nœud traduit
-    return translatedNode;
+    // Retournez le nœud
+    return currentNode;
   }
 
   public onNodeChange(newNodeId: string): void {
