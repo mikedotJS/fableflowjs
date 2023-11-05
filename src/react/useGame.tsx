@@ -35,7 +35,7 @@ export function useGame(story: Story, language: string) {
     game.start();
     setCurrentNode(game.getCurrentNode());
     // Ajoutez ici toute logique supplémentaire nécessaire lors du démarrage du jeu
-  }, [game]);
+  }, []);
 
   useEffect(() => {
     window.addEventListener("beforeunload", game.saveGame);
