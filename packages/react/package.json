@@ -1,6 +1,10 @@
 {
   "name": "@fableflowjs/react",
+<<<<<<< HEAD
   "version": "1.0.3",
+=======
+  "version": "1.0.4",
+>>>>>>> fcb8a2808b5bb4350c50fc198defdc0bd5dfa6f9
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -12,7 +16,11 @@
   "author": "",
   "license": "ISC",
   "peerDependencies": {
+<<<<<<< HEAD
     "@fableflowjs/core": "^1.0.3"
+=======
+    "@fableflowjs/core": "^1.0.4"
+>>>>>>> fcb8a2808b5bb4350c50fc198defdc0bd5dfa6f9
   },
   "devDependencies": {
     "@types/react": "^18.2.35",

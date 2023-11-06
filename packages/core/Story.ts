@@ -4,6 +4,7 @@
 interface StoryOption {
   text: string; // Le texte de l'option affiché au joueur
   nextNodeId: string; // L'ID du nœud suivant dans l'histoire
+  isImportant?: boolean // Si la node doit être save dans l'inventory de décision
   // Vous pouvez ajouter d'autres propriétés comme des conditions ou des conséquences ici
 }
 
@@ -14,7 +15,9 @@ interface StoryNode {
   options: StoryOption[]; // Les options disponibles pour ce nœud
   // Vous pouvez ajouter d'autres propriétés comme des images, de la musique, etc.
 }
-
+interface ImportantNode {
+  ids : string[]; // the id of the saved node
+}
 // Définition de l'interface pour une histoire complète
 interface Story {
   startNodeId: string; // L'ID du nœud de départ de l'histoire
@@ -25,14 +28,20 @@ interface Story {
 // Vous pouvez également définir une classe si vous avez besoin de logique supplémentaire pour gérer les histoires
 class StoryManager {
   private story: Story;
+  private importantNodes : ImportantNode
 
-  constructor(story: Story) {
+  constructor(story: Story, importantNodes: ImportantNode) {
     this.story = story;
+    this.importantNodes = importantNodes
   }
 
   // Méthode pour obtenir un nœud spécifique par ID
   getNodeById(nodeId: string): StoryNode | undefined {
     return this.story.nodes[nodeId];
+  }
+
+  checkImportantChoiceById(nodeId: string): boolean | undefined {
+   return this.importantNodes.ids.includes(nodeId) ? true : false
   }
 
   // Méthode pour obtenir le nœud de départ
@@ -48,4 +57,4 @@ class StoryManager {
 }
 
 // Exportez les interfaces et la classe pour utilisation dans d'autres modules
-export { StoryOption, StoryNode, Story, StoryManager };
+export { StoryOption, StoryNode, Story, StoryManager, ImportantNode };

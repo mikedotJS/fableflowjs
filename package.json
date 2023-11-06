@@ -10,7 +10,8 @@
     "test:core": "cd packages/core && npm run test",
     "test:react": "cd packages/react && npm run test",
     "publish:core": "cd packages/core && npm publish --access public",
-    "publish:react": "cd packages/react && npm publish --access public"
+    "publish:react": "cd packages/react && npm publish --access public",
+    "publish:all": "npm run build:core && npm run publish:core && npm run build:react && npm run publish:react"
   },
   "devDependencies": {
     "typescript": "^5.2.2"

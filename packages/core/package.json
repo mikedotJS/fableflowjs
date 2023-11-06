@@ -1,6 +1,10 @@
 {
   "name": "@fableflowjs/core",
+<<<<<<< HEAD
   "version": "1.0.3",
+=======
+  "version": "1.0.4",
+>>>>>>> fcb8a2808b5bb4350c50fc198defdc0bd5dfa6f9
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

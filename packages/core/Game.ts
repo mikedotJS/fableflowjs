@@ -1,11 +1,12 @@
 // src/core/Game.ts
 
 // Importez les types et interfaces nécessaires
-import { Story, StoryNode } from "./Story";
+import { Story, StoryNode, ImportantNode } from "./Story";
 
 // Définition de l'interface pour l'état du jeu, si nécessaire
 interface GameState {
   currentNodeId: string;
+  importantNodes: ImportantNode;
   // ... autres propriétés pour l'état du jeu
 }
 
@@ -18,6 +19,7 @@ class Game {
     // Initialisez l'état du jeu avec le nœud de départ de l'histoire
     this.currentState = {
       currentNodeId: story.startNodeId,
+      importantNodes: {ids: []}
       // ... initialisation d'autres propriétés de l'état
     };
   }
@@ -27,6 +29,7 @@ class Game {
     // Réinitialisez l'état du jeu avec le nœud de départ de l'histoire
     this.currentState = {
       currentNodeId: this.story.startNodeId,
+      importantNodes: {ids: []}
       // ... initialisation d'autres propriétés de l'état
     };
 
@@ -53,15 +56,22 @@ class Game {
       console.log(`${index + 1}: ${option.text}`);
     });
   }
-
+    private saveImportantChoice (id: string) : void {
+    let newNodes = [...this.currentState.importantNodes.ids, id];
+    this.currentState.importantNodes.ids = newNodes
+      
+    }
   // Méthode pour faire avancer l'histoire
-  public choose(optionIndex: number): void {
+  public choose(optionIndex: number, isImportant: boolean): void {
     // Obtenez le nœud actuel de l'histoire
     const currentNode = this.getCurrentNode();
 
     // Vérifiez si l'optionIndex est valide
     if (optionIndex < 0 || optionIndex >= currentNode.options.length) {
       throw new Error("Invalid option index.");
+    }
+    if(isImportant) {
+      this.saveImportantChoice(currentNode.id)
     }
 
     // Obtenez l'option choisie
